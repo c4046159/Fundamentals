@@ -1,2 +1,2 @@
-# Fundamentals
-Fundamentals of Computing
+# MODULE-1
+FUNDAMENTALS OF COMPUTING (NS1 BF-2024/5)
