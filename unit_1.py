@@ -6,7 +6,7 @@ class Planet:
     def __init__(self, name, mass, distance_from_sun, moons):
         self.name = name
         self.mass = mass  # in kilograms
-        self.distance_from_sun = distance_from_sun  # in kilometers
+        self.distance_from_sun = distance_from_sun  # in kilometres
         self.moons = moons 
 
     def __str__(self):
