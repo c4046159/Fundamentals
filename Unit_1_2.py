@@ -1,4 +1,3 @@
-import json
 from typing import List, Dict
 
 class Planet:
@@ -15,34 +14,18 @@ class Planet:
                 f"Moons: {', '.join(self.moons) if self.moons else 'None'}")
 
 class PlanetDatabase:
-    def __init__(self, filename: str = "planets_data.json"):
-        self.planets: Dict[str, Planet] = {}
-        self.filename = filename
-        self.load_data()
-
-    def load_data(self):
-        # Data sourced from Wikipedia (https://en.wikipedia.org/wiki/Planet)
-        default_data = {
-            "Mercury": {"mass": 0.330, "distance": 57.9, "moons": []},
-            "Venus": {"mass": 4.87, "distance": 108.2, "moons": []},
-            "Earth": {"mass": 5.97, "distance": 149.6, "moons": ["Moon"]},
-            "Mars": {"mass": 0.642, "distance": 227.9, "moons": ["Phobos", "Deimos"]},
-            "Jupiter": {"mass": 1898, "distance": 778.6, "moons": ["Io", "Europa", "Ganymede", "Callisto"]},
-            "Saturn": {"mass": 568, "distance": 1433.5, "moons": ["Titan", "Enceladus", "Mimas"]},
-            "Uranus": {"mass": 86.8, "distance": 2872.5, "moons": ["Titania", "Oberon", "Umbriel"]},
-            "Neptune": {"mass": 102, "distance": 4495.1, "moons": ["Triton", "Nereid"]}
+    def __init__(self):
+        # Hardcoded data from Wikipedia (https://en.wikipedia.org/wiki/Planet)
+        self.planets: Dict[str, Planet] = {
+            "mercury": Planet("Mercury", 0.330, 57.9, []),
+            "venus": Planet("Venus", 4.87, 108.2, []),
+            "earth": Planet("Earth", 5.97, 149.6, ["Moon"]),
+            "mars": Planet("Mars", 0.642, 227.9, ["Phobos", "Deimos"]),
+            "jupiter": Planet("Jupiter", 1898, 778.6, ["Io", "Europa", "Ganymede", "Callisto"]),
+            "saturn": Planet("Saturn", 568, 1433.5, ["Titan", "Enceladus", "Mimas"]),
+            "uranus": Planet("Uranus", 86.8, 2872.5, ["Titania", "Oberon", "Umbriel"]),
+            "neptune": Planet("Neptune", 102, 4495.1, ["Triton", "Nereid"])
         }
-        
-        try:
-            with open(self.filename, 'r') as f:
-                data = json.load(f)
-        except FileNotFoundError:
-            data = default_data
-            with open(self.filename, 'w') as f:
-                json.dump(data, f, indent=4)
-        
-        for name, info in data.items():
-            self.planets[name.lower()] = Planet(name, info["mass"], info["distance"], info["moons"])
 
     def get_all_info(self, planet_name: str) -> str:
         planet_name = planet_name.lower()
